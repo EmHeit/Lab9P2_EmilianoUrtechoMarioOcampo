@@ -297,6 +297,9 @@ public class Principal extends javax.swing.JFrame {
             txf_country.getText(), Integer.parseInt(ftxf_postalCode.getText()), txf_category.getText(), txf_shipDate.getText(),
             txf_costumerName.getText(), txf_city.getText(), txf_region.getText(), txf_subCategory.getText(), ftxf_sale.getText(),
             Integer.parseInt(ftxf_quantity.getText()), Integer.parseInt(ftxf_discount.getText()), Integer.parseInt(ftxf_profit.getText()));
+            
+            listaRegistro.add(registro);
+            
         }
     }//GEN-LAST:event_b_agregarRegistroMouseClicked
 
