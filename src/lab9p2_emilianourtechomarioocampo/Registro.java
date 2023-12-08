@@ -19,11 +19,12 @@ public class Registro {
     private int Quantity;
     private int Discount;
     private int Profit;
+    private String ProductName;
 
     public Registro() {
     }
 
-    public Registro(String OrderID, String ShipMode, String Segment, String State, String ProductID, String OrderDate, String CustomerID, String Country, int PostalCode, String Category, String ShipDate, String CustomerName, String City, String Region, String SubCategory, String Sales, int Quantity, int Discount, int Profit) {
+    public Registro(String OrderID, String ShipMode, String Segment, String State, String ProductID, String OrderDate, String CustomerID, String Country, int PostalCode, String Category, String ShipDate, String CustomerName, String City, String Region, String SubCategory, String Sales, int Quantity, int Discount, int Profit, String ProductName) {
         this.OrderID = OrderID;
         this.ShipMode = ShipMode;
         this.Segment = Segment;
@@ -43,6 +44,7 @@ public class Registro {
         this.Quantity = Quantity;
         this.Discount = Discount;
         this.Profit = Profit;
+        this.ProductName = ProductName;
     }
 
     public String getOrderID() {
@@ -195,6 +197,14 @@ public class Registro {
 
     public void setProfit(int Profit) {
         this.Profit = Profit;
+    }
+
+    public String getProductName() {
+        return ProductName;
+    }
+
+    public void setProductName(String ProductName) {
+        this.ProductName = ProductName;
     }
     
     

@@ -296,10 +296,48 @@ public class Principal extends javax.swing.JFrame {
             txf_state.getText(), txf_productID.getText(), txf_orderDate.getText(), txf_costumerID.getText(), 
             txf_country.getText(), Integer.parseInt(ftxf_postalCode.getText()), txf_category.getText(), txf_shipDate.getText(),
             txf_costumerName.getText(), txf_city.getText(), txf_region.getText(), txf_subCategory.getText(), ftxf_sale.getText(),
-            Integer.parseInt(ftxf_quantity.getText()), Integer.parseInt(ftxf_discount.getText()), Integer.parseInt(ftxf_profit.getText()));
+            Integer.parseInt(ftxf_quantity.getText()), Integer.parseInt(ftxf_discount.getText()), Integer.parseInt(ftxf_profit.getText()),
+            txf_productName.getText());
             
             listaRegistro.add(registro);
             
+            Dba db = new Dba("./TenRecord.accdb");
+            db.conectar();
+            try {
+                int q,d, post;
+                String p, oID, sM, s, st, pID, oD, cID, c, cat, sD, cN, city, r, subC, sales, pN;
+                //INT
+                q = Integer.parseInt(ftxf_quantity.getText());
+                d = Integer.parseInt(ftxf_discount.getText());
+                p =ftxf_profit.getText();
+                post = Integer.parseInt(ftxf_postalCode.getText());     
+                //STRING
+                oID = txf_orderID.getText();
+                sM = txf_shipMode.getText();
+                s = txf_segment.getText();
+                st = txf_state.getText();
+                pID = txf_productID.getText();
+                oD = txf_orderDate.getText();
+                cID = txf_costumerID.getText();
+                c = txf_country.getText();
+                cat = txf_category.getText();
+                sD = txf_shipDate.getText();
+                cN = txf_costumerName.getText();
+                city = txf_city.getText();
+                r = txf_region.getText();
+                subC= txf_subCategory.getText();
+                sales = ftxf_sale.getText();
+                pN = txf_productName.getText();
+                
+                db.query.execute("INSERT INTO TenRecord"
+                +"(F2,F3,F4,F5,F6,F7,F8,F9,F10,F11,F12,F13,F14,F15,F16,F17,F18,F19,F20,F21)"
+                + "VALUES ('"+ oID+ "', '"+ oD +"', '"+sD+"', '"+sM+"', '"+ cID+"', '"+ cN+"', '"+ s +"', '" + c +"', '"+city+"', '"+st+"', '"+post+"', '"+ r+ "', '"+pID+"', '"+cat+"', '"+subC+"', '"+ pN +"', '" +sales+"', '"+q+"', '"+d+"', '"+p+"')");
+                db.commit();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "No se pudo completar la operacion");
+                e.printStackTrace();
+            }
+            db.desconectar();
         }
     }//GEN-LAST:event_b_agregarRegistroMouseClicked
 
