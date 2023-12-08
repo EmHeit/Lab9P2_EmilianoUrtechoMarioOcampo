@@ -10,19 +10,20 @@ public class Registro {
     private String Country;
     private int PostalCode;
     private String Category;
-    private int ShipDate;
+    private String ShipDate;
     private String CustomerName;
     private String City;
     private String Region;
     private String SubCategory;
-    private Double Sales;
+    private String Sales;
     private int Quantity;
     private int Discount;
+    private int Profit;
 
     public Registro() {
     }
 
-    public Registro(String OrderID, String ShipMode, String Segment, String State, String ProductID, String OrderDate, String CustomerID, String Country, int PostalCode, String Category, int ShipDate, String CustomerName, String City, String Region, String SubCategory, Double Sales, int Quantity, int Discount) {
+    public Registro(String OrderID, String ShipMode, String Segment, String State, String ProductID, String OrderDate, String CustomerID, String Country, int PostalCode, String Category, String ShipDate, String CustomerName, String City, String Region, String SubCategory, String Sales, int Quantity, int Discount, int Profit) {
         this.OrderID = OrderID;
         this.ShipMode = ShipMode;
         this.Segment = Segment;
@@ -41,6 +42,7 @@ public class Registro {
         this.Sales = Sales;
         this.Quantity = Quantity;
         this.Discount = Discount;
+        this.Profit = Profit;
     }
 
     public String getOrderID() {
@@ -123,11 +125,11 @@ public class Registro {
         this.Category = Category;
     }
 
-    public int getShipDate() {
+    public String getShipDate() {
         return ShipDate;
     }
 
-    public void setShipDate(int ShipDate) {
+    public void setShipDate(String ShipDate) {
         this.ShipDate = ShipDate;
     }
 
@@ -163,11 +165,11 @@ public class Registro {
         this.SubCategory = SubCategory;
     }
 
-    public Double getSales() {
+    public String getSales() {
         return Sales;
     }
 
-    public void setSales(Double Sales) {
+    public void setSales(String Sales) {
         this.Sales = Sales;
     }
 
@@ -185,6 +187,14 @@ public class Registro {
 
     public void setDiscount(int Discount) {
         this.Discount = Discount;
+    }
+
+    public int getProfit() {
+        return Profit;
+    }
+
+    public void setProfit(int Profit) {
+        this.Profit = Profit;
     }
     
     

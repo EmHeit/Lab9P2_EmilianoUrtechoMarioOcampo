@@ -4,6 +4,8 @@
  */
 package lab9p2_emilianourtechomarioocampo;
 
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -16,7 +18,7 @@ public class Principal extends javax.swing.JFrame {
      * Creates new form Principal
      */
     DefaultTableModel tableModel = new DefaultTableModel();
-
+    Registro registro;
     public Principal() {
         initComponents();
         
@@ -38,35 +40,32 @@ public class Principal extends javax.swing.JFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        txf_orderID = new javax.swing.JTextField();
+        txf_shipMode = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        txf_segment = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        txf_state = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        txf_productID = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
+        txf_costumerID = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
+        txf_country = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        jTextField9 = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        jTextField10 = new javax.swing.JTextField();
-        jTextField11 = new javax.swing.JTextField();
+        txf_category = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jTextField12 = new javax.swing.JTextField();
+        txf_costumerName = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
-        jTextField13 = new javax.swing.JTextField();
+        txf_city = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
-        jTextField14 = new javax.swing.JTextField();
+        txf_region = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
-        jTextField15 = new javax.swing.JTextField();
+        txf_subCategory = new javax.swing.JTextField();
         jTextField16 = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
@@ -78,30 +77,33 @@ public class Principal extends javax.swing.JFrame {
         jLabel20 = new javax.swing.JLabel();
         jTextField20 = new javax.swing.JTextField();
         jLabel21 = new javax.swing.JLabel();
-        jTextField21 = new javax.swing.JTextField();
+        txf_productName = new javax.swing.JTextField();
         jLabel22 = new javax.swing.JLabel();
-        jTextField22 = new javax.swing.JTextField();
         jLabel23 = new javax.swing.JLabel();
-        jTextField23 = new javax.swing.JTextField();
-        jTextField24 = new javax.swing.JTextField();
         jLabel24 = new javax.swing.JLabel();
-        jTextField25 = new javax.swing.JTextField();
         jLabel25 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        b_agregarRegistro = new javax.swing.JButton();
+        ftxf_discount = new javax.swing.JFormattedTextField();
+        ftxf_postalCode = new javax.swing.JFormattedTextField();
+        ftxf_sale = new javax.swing.JFormattedTextField();
+        ftxf_quantity = new javax.swing.JFormattedTextField();
+        ftxf_profit = new javax.swing.JFormattedTextField();
+        txf_shipDate = new javax.swing.JTextField();
+        txf_orderDate = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        b_clear = new javax.swing.JButton();
+        b_orders = new javax.swing.JButton();
+        b_details = new javax.swing.JButton();
+        b_costumers = new javax.swing.JButton();
+        b_products = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txta_listar = new javax.swing.JTextArea();
         jPanel3 = new javax.swing.JPanel();
-        jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
+        b_eliminarRegistro = new javax.swing.JButton();
+        b_updateTabla = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         Lt_tabla = new javax.swing.JTable();
-        jProgressBar1 = new javax.swing.JProgressBar();
+        pb_carga = new javax.swing.JProgressBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -110,63 +112,60 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel1.setText("Order Id");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 30, 110, -1));
-        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 70, 110, -1));
+        jPanel1.add(txf_orderID, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 30, 110, -1));
+        jPanel1.add(txf_shipMode, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 70, 110, -1));
 
         jLabel2.setText("Ship Mode");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, -1));
-        jPanel1.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, 110, -1));
+        jPanel1.add(txf_segment, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, 110, -1));
 
         jLabel3.setText("Segment");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, -1, -1));
-        jPanel1.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 150, 110, -1));
+        jPanel1.add(txf_state, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 150, 110, -1));
 
         jLabel4.setText("State");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, -1, -1));
-        jPanel1.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 180, 110, -1));
+        jPanel1.add(txf_productID, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 180, 110, -1));
 
         jLabel5.setText("Product ID");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, -1, -1));
-        jPanel1.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 30, 110, -1));
 
         jLabel6.setText("Order Date");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 30, -1, -1));
 
         jLabel7.setText("Costumer ID");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 70, -1, -1));
-        jPanel1.add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 70, 110, -1));
+        jPanel1.add(txf_costumerID, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 70, 110, -1));
 
         jLabel8.setText("Country");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 110, -1, -1));
-        jPanel1.add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 110, 110, -1));
+        jPanel1.add(txf_country, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 110, 110, -1));
 
         jLabel9.setText("Postal Code");
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 150, -1, -1));
-        jPanel1.add(jTextField9, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 150, 110, -1));
 
         jLabel10.setText("Category");
         jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 180, -1, -1));
-        jPanel1.add(jTextField10, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 180, 110, -1));
-        jPanel1.add(jTextField11, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 30, 110, -1));
+        jPanel1.add(txf_category, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 180, 110, -1));
 
         jLabel11.setText("Ship Date");
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 30, -1, -1));
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 30, -1, -1));
 
         jLabel12.setText("Costumer Name");
         jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 70, -1, -1));
-        jPanel1.add(jTextField12, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 70, 110, -1));
+        jPanel1.add(txf_costumerName, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 70, 110, -1));
 
         jLabel13.setText("City");
         jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 110, -1, -1));
-        jPanel1.add(jTextField13, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 110, 110, -1));
+        jPanel1.add(txf_city, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 110, 110, -1));
 
-        jLabel14.setText("Registro");
+        jLabel14.setText("Region");
         jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 150, -1, -1));
-        jPanel1.add(jTextField14, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 150, 110, -1));
+        jPanel1.add(txf_region, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 150, 110, -1));
 
         jLabel15.setText("Sub-Category");
-        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 180, -1, -1));
-        jPanel1.add(jTextField15, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 180, 110, -1));
+        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 180, -1, -1));
+        jPanel1.add(txf_subCategory, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 180, 110, -1));
         jPanel1.add(jTextField16, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 30, 110, -1));
 
         jLabel16.setText("Order Id");
@@ -190,49 +189,62 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel21.setText("Product Name");
         jPanel1.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, -1, -1));
-        jPanel1.add(jTextField21, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 220, 560, -1));
+        jPanel1.add(txf_productName, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 220, 560, -1));
 
         jLabel22.setText("Sale");
         jPanel1.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, -1, -1));
-        jPanel1.add(jTextField22, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, 110, -1));
 
         jLabel23.setText("Quantity");
         jPanel1.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 250, -1, -1));
-        jPanel1.add(jTextField23, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 250, 110, -1));
-        jPanel1.add(jTextField24, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 250, 110, -1));
 
         jLabel24.setText("Discount");
         jPanel1.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 250, -1, -1));
-        jPanel1.add(jTextField25, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 280, 110, -1));
 
         jLabel25.setText("Profit");
         jPanel1.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 280, -1, -1));
 
-        jButton1.setText("Agregar Registro");
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 280, -1, -1));
+        b_agregarRegistro.setText("Agregar Registro");
+        b_agregarRegistro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        b_agregarRegistro.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                b_agregarRegistroMouseClicked(evt);
+            }
+        });
+        jPanel1.add(b_agregarRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 280, -1, -1));
+        jPanel1.add(ftxf_discount, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 250, 110, -1));
+        jPanel1.add(ftxf_postalCode, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 150, 110, -1));
+
+        ftxf_sale.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
+        jPanel1.add(ftxf_sale, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, 110, -1));
+        jPanel1.add(ftxf_quantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 250, 110, -1));
+
+        ftxf_profit.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
+        jPanel1.add(ftxf_profit, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 280, 110, -1));
+        jPanel1.add(txf_shipDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 30, 130, -1));
+        jPanel1.add(txf_orderDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 30, 130, -1));
 
         jTabbedPane1.addTab("Agregar Registro", jPanel1);
 
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton2.setText("Clear");
-        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 20, 70, -1));
+        b_clear.setText("Clear");
+        jPanel2.add(b_clear, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 20, 70, -1));
 
-        jButton3.setText("Orders");
-        jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(27, 18, 130, -1));
+        b_orders.setText("Orders");
+        jPanel2.add(b_orders, new org.netbeans.lib.awtextra.AbsoluteConstraints(27, 18, 130, -1));
 
-        jButton4.setText("Details");
-        jPanel2.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 18, 130, -1));
+        b_details.setText("Details");
+        jPanel2.add(b_details, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 18, 130, -1));
 
-        jButton5.setText("Customers");
-        jPanel2.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 18, 130, -1));
+        b_costumers.setText("Customers");
+        jPanel2.add(b_costumers, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 18, 130, -1));
 
-        jButton6.setText("Products");
-        jPanel2.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 18, 130, -1));
+        b_products.setText("Products");
+        jPanel2.add(b_products, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 18, 130, -1));
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        txta_listar.setColumns(20);
+        txta_listar.setRows(5);
+        jScrollPane1.setViewportView(txta_listar);
 
         jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 660, 240));
 
@@ -240,11 +252,11 @@ public class Principal extends javax.swing.JFrame {
 
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton7.setText("Eliminar Registro");
-        jPanel3.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 280, -1, -1));
+        b_eliminarRegistro.setText("Eliminar Registro");
+        jPanel3.add(b_eliminarRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 280, -1, -1));
 
-        jButton8.setText("Update Tabla");
-        jPanel3.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 280, -1, -1));
+        b_updateTabla.setText("Update Tabla");
+        jPanel3.add(b_updateTabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 280, -1, -1));
 
         Lt_tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -264,10 +276,29 @@ public class Principal extends javax.swing.JFrame {
         jTabbedPane1.addTab("Eliminar Registro", jPanel3);
 
         getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 670, 340));
-        getContentPane().add(jProgressBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 670, 40));
+        getContentPane().add(pb_carga, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 670, 40));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void b_agregarRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_b_agregarRegistroMouseClicked
+        if (txf_orderID.equals("") || txf_orderDate.equals("") || txf_shipDate.equals("")||
+                txf_shipMode.equals("") || txf_costumerID.equals("") || txf_costumerName.equals("")||
+                txf_segment.equals("") || txf_country.equals("") || txf_city.equals("") ||
+                txf_state.equals("") || ftxf_postalCode.equals("") || txf_region.equals("") || 
+                txf_productID.equals("") || txf_category.equals("") || txf_subCategory.equals("") ||
+                txf_productName.equals("") || ftxf_sale.equals("") ||
+                ftxf_discount.equals("") ||ftxf_profit.equals("") || ftxf_quantity.equals("")){
+            
+            JOptionPane.showConfirmDialog(this, "Llene todas las casillas por favor");
+        }else{            
+            registro = new Registro(txf_orderID.getText(), txf_shipMode.getText(), txf_segment.getText(),
+            txf_state.getText(), txf_productID.getText(), txf_orderDate.getText(), txf_costumerID.getText(), 
+            txf_country.getText(), Integer.parseInt(ftxf_postalCode.getText()), txf_category.getText(), txf_shipDate.getText(),
+            txf_costumerName.getText(), txf_city.getText(), txf_region.getText(), txf_subCategory.getText(), ftxf_sale.getText(),
+            Integer.parseInt(ftxf_quantity.getText()), Integer.parseInt(ftxf_discount.getText()), Integer.parseInt(ftxf_profit.getText()));
+        }
+    }//GEN-LAST:event_b_agregarRegistroMouseClicked
 
     /**
      * @param args the command line arguments
@@ -304,16 +335,23 @@ public class Principal extends javax.swing.JFrame {
         });
     }
 
+    
+    ArrayList<Registro> listaRegistro = new ArrayList();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable Lt_tabla;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
+    private javax.swing.JButton b_agregarRegistro;
+    private javax.swing.JButton b_clear;
+    private javax.swing.JButton b_costumers;
+    private javax.swing.JButton b_details;
+    private javax.swing.JButton b_eliminarRegistro;
+    private javax.swing.JButton b_orders;
+    private javax.swing.JButton b_products;
+    private javax.swing.JButton b_updateTabla;
+    private javax.swing.JFormattedTextField ftxf_discount;
+    private javax.swing.JFormattedTextField ftxf_postalCode;
+    private javax.swing.JFormattedTextField ftxf_profit;
+    private javax.swing.JFormattedTextField ftxf_quantity;
+    private javax.swing.JFormattedTextField ftxf_sale;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -342,35 +380,30 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField12;
-    private javax.swing.JTextField jTextField13;
-    private javax.swing.JTextField jTextField14;
-    private javax.swing.JTextField jTextField15;
     private javax.swing.JTextField jTextField16;
     private javax.swing.JTextField jTextField17;
     private javax.swing.JTextField jTextField18;
     private javax.swing.JTextField jTextField19;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField20;
-    private javax.swing.JTextField jTextField21;
-    private javax.swing.JTextField jTextField22;
-    private javax.swing.JTextField jTextField23;
-    private javax.swing.JTextField jTextField24;
-    private javax.swing.JTextField jTextField25;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
+    private javax.swing.JProgressBar pb_carga;
+    private javax.swing.JTextField txf_category;
+    private javax.swing.JTextField txf_city;
+    private javax.swing.JTextField txf_costumerID;
+    private javax.swing.JTextField txf_costumerName;
+    private javax.swing.JTextField txf_country;
+    private javax.swing.JTextField txf_orderDate;
+    private javax.swing.JTextField txf_orderID;
+    private javax.swing.JTextField txf_productID;
+    private javax.swing.JTextField txf_productName;
+    private javax.swing.JTextField txf_region;
+    private javax.swing.JTextField txf_segment;
+    private javax.swing.JTextField txf_shipDate;
+    private javax.swing.JTextField txf_shipMode;
+    private javax.swing.JTextField txf_state;
+    private javax.swing.JTextField txf_subCategory;
+    private javax.swing.JTextArea txta_listar;
     // End of variables declaration//GEN-END:variables
 }
