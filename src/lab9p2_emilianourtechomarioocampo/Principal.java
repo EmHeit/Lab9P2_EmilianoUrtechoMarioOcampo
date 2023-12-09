@@ -4,8 +4,10 @@
  */
 package lab9p2_emilianourtechomarioocampo;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.JProgressBar;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -17,6 +19,7 @@ public class Principal extends javax.swing.JFrame {
     /**
      * Creates new form Principal
      */
+    pg t1, t2, t3, t4, t5, t6, t7, t8;
     DefaultTableModel tableModel = new DefaultTableModel();
     Registro registro;
     public Principal() {
@@ -27,7 +30,47 @@ public class Principal extends javax.swing.JFrame {
         Lt_tabla.setModel(tableModel);
         
     }
+        class pg extends Thread {
 
+        JProgressBar pb_carga;
+
+        public pg(JProgressBar pb_carga) {
+            this.pb_carga = pb_carga;
+        }
+        
+        @Override
+        public void run() {
+            int min = 0;
+            int max = 10;
+
+            pb_carga.setMaximum(min);
+            pb_carga.setMaximum(max - 1);
+            pb_carga.setValue(0);
+            
+            
+
+            for (int i = min; i < max; i++) {
+                pb_carga.setValue(i);
+                pb_carga.setBackground(Color.red);
+
+                try {
+                    sleep(500);
+                } catch (InterruptedException ex) {
+                    ex.printStackTrace();
+                }
+            }
+            if (pb_carga.getValue() == max - 1) {
+                JOptionPane.showInputDialog("Accion Completada");
+                
+            }
+            if (pb_carga.getValue() == max-1) {
+            pb_carga.setValue(0);
+        }
+            
+            
+        }
+
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -228,18 +271,43 @@ public class Principal extends javax.swing.JFrame {
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         b_clear.setText("Clear");
+        b_clear.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                b_clearMouseClicked(evt);
+            }
+        });
         jPanel2.add(b_clear, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 20, 70, -1));
 
         b_orders.setText("Orders");
+        b_orders.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                b_ordersMouseClicked(evt);
+            }
+        });
         jPanel2.add(b_orders, new org.netbeans.lib.awtextra.AbsoluteConstraints(27, 18, 130, -1));
 
         b_details.setText("Details");
+        b_details.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                b_detailsMouseClicked(evt);
+            }
+        });
         jPanel2.add(b_details, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 18, 130, -1));
 
         b_costumers.setText("Customers");
+        b_costumers.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                b_costumersMouseClicked(evt);
+            }
+        });
         jPanel2.add(b_costumers, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 18, 130, -1));
 
         b_products.setText("Products");
+        b_products.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                b_productsMouseClicked(evt);
+            }
+        });
         jPanel2.add(b_products, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 18, 130, -1));
 
         txta_listar.setColumns(20);
@@ -253,9 +321,19 @@ public class Principal extends javax.swing.JFrame {
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         b_eliminarRegistro.setText("Eliminar Registro");
+        b_eliminarRegistro.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                b_eliminarRegistroMouseClicked(evt);
+            }
+        });
         jPanel3.add(b_eliminarRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 280, -1, -1));
 
         b_updateTabla.setText("Update Tabla");
+        b_updateTabla.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                b_updateTablaMouseClicked(evt);
+            }
+        });
         jPanel3.add(b_updateTabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 280, -1, -1));
 
         Lt_tabla.setModel(new javax.swing.table.DefaultTableModel(
@@ -282,6 +360,9 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void b_agregarRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_b_agregarRegistroMouseClicked
+        t1 = new pg(pb_carga);
+        t1.start();
+        
         if (txf_orderID.equals("") || txf_orderDate.equals("") || txf_shipDate.equals("")||
                 txf_shipMode.equals("") || txf_costumerID.equals("") || txf_costumerName.equals("")||
                 txf_segment.equals("") || txf_country.equals("") || txf_city.equals("") ||
@@ -340,6 +421,41 @@ public class Principal extends javax.swing.JFrame {
             db.desconectar();
         }
     }//GEN-LAST:event_b_agregarRegistroMouseClicked
+
+    private void b_ordersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_b_ordersMouseClicked
+        t2 = new pg(pb_carga);
+        t2.start();
+    }//GEN-LAST:event_b_ordersMouseClicked
+
+    private void b_detailsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_b_detailsMouseClicked
+        t3 = new pg(pb_carga);
+        t3.start();
+    }//GEN-LAST:event_b_detailsMouseClicked
+
+    private void b_costumersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_b_costumersMouseClicked
+        t4 = new pg(pb_carga);
+        t4.start();
+    }//GEN-LAST:event_b_costumersMouseClicked
+
+    private void b_productsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_b_productsMouseClicked
+        t5 = new pg(pb_carga);
+        t5.start();
+    }//GEN-LAST:event_b_productsMouseClicked
+
+    private void b_clearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_b_clearMouseClicked
+        t6 = new pg(pb_carga);
+        t6.start();
+    }//GEN-LAST:event_b_clearMouseClicked
+
+    private void b_updateTablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_b_updateTablaMouseClicked
+        t7 = new pg(pb_carga);
+        t7.start();
+    }//GEN-LAST:event_b_updateTablaMouseClicked
+
+    private void b_eliminarRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_b_eliminarRegistroMouseClicked
+        t8 = new pg(pb_carga);
+        t8.start();
+    }//GEN-LAST:event_b_eliminarRegistroMouseClicked
 
     /**
      * @param args the command line arguments
