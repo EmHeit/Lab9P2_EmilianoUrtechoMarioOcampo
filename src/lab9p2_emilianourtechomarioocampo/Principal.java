@@ -5,7 +5,10 @@
 package lab9p2_emilianourtechomarioocampo;
 
 import java.awt.Color;
+import java.sql.SQLException;
+import java.sql.ResultSet;
 import java.util.ArrayList;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.JProgressBar;
 import javax.swing.table.DefaultTableModel;
@@ -60,7 +63,7 @@ public class Principal extends javax.swing.JFrame {
                 }
             }
             if (pb_carga.getValue() == max - 1) {
-                JOptionPane.showInputDialog("Accion Completada");
+                JOptionPane.showMessageDialog(null, "Accion Completada");
                 
             }
             if (pb_carga.getValue() == max-1) {
@@ -139,8 +142,8 @@ public class Principal extends javax.swing.JFrame {
         b_details = new javax.swing.JButton();
         b_costumers = new javax.swing.JButton();
         b_products = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        txta_listar = new javax.swing.JTextArea();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        L_listar = new javax.swing.JList<>();
         jPanel3 = new javax.swing.JPanel();
         b_eliminarRegistro = new javax.swing.JButton();
         b_updateTabla = new javax.swing.JButton();
@@ -278,6 +281,8 @@ public class Principal extends javax.swing.JFrame {
         });
         jPanel2.add(b_clear, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 20, 70, -1));
 
+        b_orders.setBackground(new java.awt.Color(0, 153, 0));
+        b_orders.setForeground(new java.awt.Color(0, 0, 0));
         b_orders.setText("Orders");
         b_orders.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -286,6 +291,8 @@ public class Principal extends javax.swing.JFrame {
         });
         jPanel2.add(b_orders, new org.netbeans.lib.awtextra.AbsoluteConstraints(27, 18, 130, -1));
 
+        b_details.setBackground(new java.awt.Color(255, 204, 51));
+        b_details.setForeground(new java.awt.Color(0, 0, 0));
         b_details.setText("Details");
         b_details.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -294,6 +301,8 @@ public class Principal extends javax.swing.JFrame {
         });
         jPanel2.add(b_details, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 18, 130, -1));
 
+        b_costumers.setBackground(new java.awt.Color(255, 51, 51));
+        b_costumers.setForeground(new java.awt.Color(0, 0, 0));
         b_costumers.setText("Customers");
         b_costumers.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -302,6 +311,8 @@ public class Principal extends javax.swing.JFrame {
         });
         jPanel2.add(b_costumers, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 18, 130, -1));
 
+        b_products.setBackground(new java.awt.Color(51, 51, 255));
+        b_products.setForeground(new java.awt.Color(0, 0, 0));
         b_products.setText("Products");
         b_products.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -310,11 +321,10 @@ public class Principal extends javax.swing.JFrame {
         });
         jPanel2.add(b_products, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 18, 130, -1));
 
-        txta_listar.setColumns(20);
-        txta_listar.setRows(5);
-        jScrollPane1.setViewportView(txta_listar);
+        L_listar.setModel(new DefaultListModel());
+        jScrollPane3.setViewportView(L_listar);
 
-        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 660, 240));
+        jPanel2.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 620, 230));
 
         jTabbedPane1.addTab("Listar Registro", jPanel2);
 
@@ -410,9 +420,9 @@ public class Principal extends javax.swing.JFrame {
                 sales = ftxf_sale.getText();
                 pN = txf_productName.getText();
                 
-                db.query.execute("INSERT INTO TenRecord"
-                +"(F2,F3,F4,F5,F6,F7,F8,F9,F10,F11,F12,F13,F14,F15,F16,F17,F18,F19,F20,F21)"
-                + "VALUES ('"+ oID+ "', '"+ oD +"', '"+sD+"', '"+sM+"', '"+ cID+"', '"+ cN+"', '"+ s +"', '" + c +"', '"+city+"', '"+st+"', '"+post+"', '"+ r+ "', '"+pID+"', '"+cat+"', '"+subC+"', '"+ pN +"', '" +sales+"', '"+q+"', '"+d+"', '"+p+"')");
+                db.query.execute("INSERT INTO Record"
+                +"(Order ID,Order Date,Ship Date,Ship Mode,Customer ID,Customer Name,Segment,Country,City,State,Postal Code,Region,Product ID,Category,Sub-Category,Product Name,Sales,Quantity,Discount,Profit)"
+                + "VALUES ('"+ oID+ "','"+ oD +"','"+sD+"','"+sM+"','"+ cID+"','"+ cN+"','"+ s +"','" + c +"','"+city+"','"+st+"','"+post+"','"+ r+ "','"+pID+"','"+cat+"','"+subC+"','"+ pN +"','" +sales+"','"+q+"','"+d+"','"+p+"')");
                 db.commit();
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, "No se pudo completar la operacion");
@@ -425,36 +435,195 @@ public class Principal extends javax.swing.JFrame {
     private void b_ordersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_b_ordersMouseClicked
         t2 = new pg(pb_carga);
         t2.start();
+        
+        DefaultListModel listM = (DefaultListModel) L_listar.getModel();
+        
+        
+        Dba db = new Dba("./TenRecord.accdb");
+        db.conectar();
+        
+        try {
+            db.query.execute("select a.ID,a.Order ID,a.Order Date, a.Ship Date, a.Ship Mode, a.Customer ID\n"
+                    + " from Record a ");
+            ResultSet result = db.query.getResultSet();
+            
+            Object[] ob = new Object[6];
+            while(result.next()){
+                ob[0] =result.getString(1);
+                ob[1] =result.getString(2);
+                ob[2] =result.getString(3);
+                ob[3] =result.getString(4);
+                ob[4] =result.getString(5);
+                ob[5] =result.getString(6);         
+                for (int i = 0; i < ob.length; i++) {
+                    listM.addElement(ob[i]);
+                }
+            }
+            L_listar.setModel(listM);
+            
+        } catch (Exception ex) {
+        }
+        db.desconectar();
     }//GEN-LAST:event_b_ordersMouseClicked
 
     private void b_detailsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_b_detailsMouseClicked
         t3 = new pg(pb_carga);
         t3.start();
+        
+        DefaultListModel listM = (DefaultListModel) L_listar.getModel();
+        
+        
+        Dba db = new Dba("./TenRecord.accdb");
+        db.conectar();
+        
+        try {
+            db.query.execute("select a.ID,a.Order ID,a.Product ID,a.Quantity,a.Discount,a.Profit\n from Record a ");
+            ResultSet result = db.query.getResultSet();
+            
+            Object[] ob = new Object[6];
+            while(result.next()){
+                ob[0] =result.getString(1);
+                ob[1] =result.getString(2);
+                ob[2] =result.getString(3);
+                ob[3] =result.getString(4);
+                ob[4] =result.getString(5);
+                ob[5] =result.getString(6);         
+                for (int i = 0; i < ob.length; i++) {
+                    listM.addElement(ob[i]);
+                }
+            }
+            L_listar.setModel(listM);
+            
+        } catch (Exception ex) {
+        }
+        db.desconectar();
+        
     }//GEN-LAST:event_b_detailsMouseClicked
 
     private void b_costumersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_b_costumersMouseClicked
         t4 = new pg(pb_carga);
         t4.start();
+        
+        DefaultListModel listM = (DefaultListModel) L_listar.getModel();
+        
+        
+        Dba db = new Dba("./TenRecord.accdb");
+        db.conectar();
+        
+        try {
+            db.query.execute("select a.ID,a.Customer ID,a.Customer Name,a.Segment,a.Country,a.City,a.State,a.Postal Code,a.Region\n"
+                    + " from Record a ");
+            ResultSet result = db.query.getResultSet();
+            
+            Object[] ob = new Object[6];
+            while(result.next()){
+                ob[0] =result.getString(1);
+                ob[1] =result.getString(2);
+                ob[2] =result.getString(3);
+                ob[3] =result.getString(4);
+                ob[4] =result.getString(5);
+                ob[5] =result.getString(6);         
+                for (int i = 0; i < ob.length; i++) {
+                    listM.addElement(ob[i]);
+                }
+            }
+            L_listar.setModel(listM);
+            
+        } catch (Exception ex) {
+        }
+        db.desconectar();
+        
     }//GEN-LAST:event_b_costumersMouseClicked
 
     private void b_productsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_b_productsMouseClicked
         t5 = new pg(pb_carga);
         t5.start();
+        
+        DefaultListModel listM = (DefaultListModel) L_listar.getModel();
+        
+        
+        Dba db = new Dba("./TenRecord.accdb");
+        db.conectar();
+        
+        try {
+            db.query.execute("select a.ID,a.Product ID,a.Category,a.Sub-Category Date,a.Product Name\n"
+                    + " from Record a ");
+            ResultSet result = db.query.getResultSet();
+            
+            Object[] ob = new Object[5];
+            while(result.next()){
+                ob[0] =result.getString(1);
+                ob[1] =result.getString(2);
+                ob[2] =result.getString(3);
+                ob[3] =result.getString(4);
+                ob[4] =result.getString(5);
+                for (int i = 0; i < ob.length; i++) {
+                    listM.addElement(ob[i]);
+                }
+            }
+            L_listar.setModel(listM);
+            
+        } catch (Exception ex) {
+        }
+        db.desconectar();
+        
     }//GEN-LAST:event_b_productsMouseClicked
 
     private void b_clearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_b_clearMouseClicked
         t6 = new pg(pb_carga);
         t6.start();
+       
+        DefaultListModel listM = (DefaultListModel) L_listar.getModel();
+        listM.clear();
     }//GEN-LAST:event_b_clearMouseClicked
 
     private void b_updateTablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_b_updateTablaMouseClicked
         t7 = new pg(pb_carga);
         t7.start();
+        
+        tableModel = (DefaultTableModel) Lt_tabla.getModel();
+        tableModel.setRowCount(0);
+        Dba db = new Dba("./TenRecord.accdb");
+        db.conectar();
+        try {
+            db.query.execute("select a.ID,a.Order ID,a.Order Date,a.Costumer ID,a.Country,a.City,a.Product ID,a.Sales\n from Record");
+            ResultSet result = db.query.getResultSet();
+            Object[] ob = new Object[7];
+            while(result.next()){
+                ob[0] = result.getString(1);
+                ob[1] = result.getString(2);
+                ob[2] = result.getString(3);
+                ob[3] = result.getString(4);
+                ob[4] = result.getString(5);
+                ob[5] = result.getString(6);
+                ob[6] = result.getString(7);
+                ob[7] = result.getString(8);
+                tableModel.addRow(ob);
+            }
+            Lt_tabla.setModel(tableModel);
+            tableModel.fireTableDataChanged();
+        } catch (Exception e) {
+        }
+        db.conectar();
     }//GEN-LAST:event_b_updateTablaMouseClicked
 
     private void b_eliminarRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_b_eliminarRegistroMouseClicked
-        t8 = new pg(pb_carga);
-        t8.start();
+        int select = Lt_tabla.getSelectedRow();
+        if (select > 0) {
+            t8 = new pg(pb_carga);
+            t8.start();            
+            tableModel = (DefaultTableModel) Lt_tabla.getModel();
+            tableModel.setRowCount(0);
+            Dba db = new Dba("./TenRecord.accdb");
+            db.conectar();
+            try {
+                db.query.execute("delete from TenRecord where ID="+Lt_tabla.getValueAt(select,0));
+                db.commit();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            db.desconectar();
+        }
     }//GEN-LAST:event_b_eliminarRegistroMouseClicked
 
     /**
@@ -495,6 +664,7 @@ public class Principal extends javax.swing.JFrame {
     
     ArrayList<Registro> listaRegistro = new ArrayList();
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JList<String> L_listar;
     private javax.swing.JTable Lt_tabla;
     private javax.swing.JButton b_agregarRegistro;
     private javax.swing.JButton b_clear;
@@ -537,8 +707,8 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField jTextField16;
     private javax.swing.JTextField jTextField17;
@@ -561,6 +731,5 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JTextField txf_shipMode;
     private javax.swing.JTextField txf_state;
     private javax.swing.JTextField txf_subCategory;
-    private javax.swing.JTextArea txta_listar;
     // End of variables declaration//GEN-END:variables
 }
